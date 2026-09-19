@@ -1,0 +1,10 @@
+services:
+  agent:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./demo_repo:/app/demo_repo
+      - ./pr_output:/app/pr_output
+      - ./config:/app/config
+    command: ["python", "main.py"]

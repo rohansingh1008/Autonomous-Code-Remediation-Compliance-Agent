@@ -1,0 +1,45 @@
+# Enterprise style + security policy definitions.
+# The compliance MCP server loads this file and checks every patch against it
+# before a pull request is allowed to be opened.
+
+style_rules:
+  - name: no-print-statements
+    pattern: '\bprint\('
+    message: "Use the logging module instead of print()."
+    severity: warning
+
+  - name: no-todo-comments
+    pattern: '#\s*TODO'
+    message: "Resolve or ticket TODOs before merging; do not leave them in shipped patches."
+    severity: warning
+
+  - name: no-bare-except
+    pattern: 'except\s*:'
+    message: "Bare except clauses are forbidden; catch specific exceptions."
+    severity: error
+
+security_rules:
+  - name: no-eval
+    pattern: '\beval\('
+    message: "eval() is forbidden; it enables arbitrary code execution."
+    severity: error
+
+  - name: no-exec
+    pattern: '\bexec\('
+    message: "exec() is forbidden; it enables arbitrary code execution."
+    severity: error
+
+  - name: no-hardcoded-secrets
+    pattern: '(?i)(api_key|password|secret|token)\s*=\s*["\''][^"\'']{4,}["\'']'
+    message: "Hardcoded credential-looking literal detected. Use environment variables or a secrets manager."
+    severity: error
+
+  - name: no-shell-true
+    pattern: 'shell\s*=\s*True'
+    message: "subprocess calls with shell=True are forbidden (command injection risk)."
+    severity: error
+
+  - name: no-pickle-loads
+    pattern: 'pickle\.loads?\('
+    message: "pickle.load/loads on untrusted input is forbidden (deserialization RCE risk)."
+    severity: error
