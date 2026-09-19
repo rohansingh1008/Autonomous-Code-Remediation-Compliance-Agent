@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+pr_output/
+demo_repo/.git/
+.pytest_cache/

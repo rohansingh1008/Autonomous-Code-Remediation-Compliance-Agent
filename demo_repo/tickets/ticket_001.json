@@ -1,0 +1,6 @@
+{
+  "id": 1,
+  "title": "ZeroDivisionError in divide()",
+  "body": "Calling divide(10, 0) crashes the service with an unhandled ZeroDivisionError. It should raise a clear ValueError instead of crashing the process.",
+  "file_hint": "app/calculator.py"
+}
